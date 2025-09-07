@@ -1,6 +1,17 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import { AppProps } from 'next/app'
+import '../styles/globals.css'
+import { useEffect } from 'react'
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps } : AppProps) {
+  useEffect(() => {
+    // prefer-reduced-motion: respect user preference
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (media.matches) {
+      document.documentElement.dataset.reducedMotion = "true"
+    }
+  }, [])
+
+  return <Component {...pageProps} />
 }
+
+export default MyApp
